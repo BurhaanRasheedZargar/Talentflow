@@ -20,7 +20,8 @@ async function bootstrap() {
     throw new Error(`Database initialization failed: ${err instanceof Error ? err.message : String(err)}`)
   }
 
-  if (import.meta.env.DEV) {
+  const enableMSW = import.meta.env.DEV || String(import.meta.env.VITE_ENABLE_MSW).toLowerCase() === 'true'
+  if (enableMSW) {
     try {
       console.log('🔧 Starting Mock Service Worker...')
       await startMSW()
