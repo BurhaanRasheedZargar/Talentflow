@@ -18,10 +18,9 @@ export interface DashboardStats {
 }
 
 export async function getDashboardStats(): Promise<DashboardStats> {
-  const [jobs, candidates, assessments] = await Promise.all([
+  const [jobs, candidates] = await Promise.all([
     db.jobs.toArray(),
     db.candidates.toArray(),
-    db.assessments.toArray(),
   ]);
 
   const candidatesByStage: Record<string, number> = {};

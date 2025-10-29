@@ -60,7 +60,8 @@ export async function getCurrentUser(): Promise<User | null> {
   const session = getCurrentSession();
   if (!session) return null;
 
-  return db.users.get(session.userId) || null;
+  const user = await db.users.get(session.userId);
+  return user ?? null;
 }
 
 export function hasRole(requiredRole: 'admin' | 'recruiter' | 'viewer'): boolean {
