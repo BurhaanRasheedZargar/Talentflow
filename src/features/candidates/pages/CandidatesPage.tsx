@@ -4,6 +4,7 @@ import { CreateEditCandidateModal } from '../components/CreateEditCandidateModal
 import { useState as useReactState } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 import { Link } from 'react-router-dom'
+import type { CandidateDto } from '../../../api/candidates'
 
 export default function CandidatesPage() {
   const [search, setSearch] = useState('')
@@ -15,7 +16,7 @@ export default function CandidatesPage() {
 
   const parentRef = useRef<HTMLDivElement | null>(null)
   const rowVirtualizer = useVirtualizer({
-    count: data?.items.length ?? 0,
+    count: data?.items?.length ?? 0,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 80,
     overscan: 10,
@@ -74,7 +75,8 @@ export default function CandidatesPage() {
       <div ref={parentRef} className="tf-card overflow-hidden" style={{ height: 600, overflow: 'auto' }}>
         <div style={{ height: rowVirtualizer.getTotalSize(), position: 'relative' }}>
           {rowVirtualizer.getVirtualItems().map(vi => {
-            const c = data!.items[vi.index]
+            const c = (data?.items?.[vi.index] as CandidateDto)
+            if (!c) return null
             const stageColors: Record<string, string> = {
               applied: 'bg-slate-700/50 text-slate-300 border border-slate-600',
               screen: 'bg-orange-900/40 text-orange-300 border border-orange-700',

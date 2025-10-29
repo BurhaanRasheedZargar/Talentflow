@@ -1,9 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, type UseQueryResult } from "@tanstack/react-query";
 import { createAssessment, deleteAssessmentApi, fetchAssessments, updateAssessment } from "../../../api/assessments";
 import type { PaginatedResponse } from "../../../api/client";
 import type { AssessmentDto } from "../../../api/assessments";
 
-export function useAssessmentsList(params: { page?: number; pageSize?: number; status?: string; jobId?: number; candidateId?: number } = { page: 1, pageSize: 20 }) {
+export function useAssessmentsList(params: { page?: number; pageSize?: number; status?: string; jobId?: number; candidateId?: number } = { page: 1, pageSize: 20 }): UseQueryResult<PaginatedResponse<AssessmentDto>> {
     return useQuery<PaginatedResponse<AssessmentDto>>({ queryKey: ["assessments", params], queryFn: () => fetchAssessments(params) });
 }
 

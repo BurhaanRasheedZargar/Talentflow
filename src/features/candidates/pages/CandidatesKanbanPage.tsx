@@ -217,7 +217,6 @@ export default function CandidatesKanbanPage() {
           <div className="grid grid-cols-6 gap-3 min-w-max">
             {STAGES.map(s => {
               const stageItems = columns[s.id] || []
-              const itemIds = stageItems.map(c => `${s.id}:${c.id}`)
               
               return (
                 <div key={s.id} className="flex flex-col w-64 flex-shrink-0">

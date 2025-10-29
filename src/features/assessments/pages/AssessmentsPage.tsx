@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useAssessmentsList, useDeleteAssessment } from '../hooks/useAssessments'
 import { CreateEditAssessmentModal } from '../components/CreateEditAssessmentModal'
+import type { AssessmentDto } from '../../../api/assessments'
 
 export default function AssessmentsPage() {
   const [status, setStatus] = useState('')
@@ -10,8 +11,8 @@ export default function AssessmentsPage() {
   const [editing, setEditing] = useState<any | null>(null)
 
   // Sort by newest first (createdAt descending)
-  const sortedItems = useMemo(() => {
-    return (data?.items ?? []).slice().sort((a, b) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
+  const sortedItems: AssessmentDto[] = useMemo(() => {
+    return (data?.items ?? []).slice().sort((a: AssessmentDto, b: AssessmentDto) => (b.createdAt ?? 0) - (a.createdAt ?? 0))
   }, [data?.items])
 
   return (
