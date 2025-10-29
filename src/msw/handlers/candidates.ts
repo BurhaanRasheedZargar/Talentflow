@@ -32,7 +32,8 @@ export const getCandidates = http.get("/candidates", async ({ request }) => {
 export const getCandidateTimeline = http.get('/candidates/:id/timeline', async ({ params }) => {
     await randomDelay();
     const id = Number(params.id);
-    const items = await db.candidateTimelines.where('candidateId').equals(id).orderBy('createdAt').toArray();
+    const items = await db.candidateTimelines.where('candidateId').equals(id).toArray();
+    items.sort((a, b) => a.createdAt - b.createdAt);
     return HttpResponse.json({ items });
 });
 

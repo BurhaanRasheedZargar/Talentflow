@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback, memo } from 'react'
+import { useMemo, useState, useCallback, memo } from 'react'
 import { 
   DndContext, 
   closestCenter, 
@@ -10,7 +10,7 @@ import {
   useDroppable
 } from '@dnd-kit/core'
 import type { DragEndEvent, DragStartEvent, DropAnimation } from '@dnd-kit/core'
-import { arrayMove, SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable'
+import { SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useCandidatesList, useUpdateCandidate } from '../hooks/useCandidates'
 

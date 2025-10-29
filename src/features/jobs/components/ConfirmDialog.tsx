@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 export function ConfirmDialog({ open, title, message, confirmText = 'Confirm', cancelText = 'Cancel', onConfirm, onCancel }: { open: boolean; title: string; message?: ReactNode; confirmText?: string; cancelText?: string; onConfirm: () => void; onCancel: () => void }) {
   if (!open) return null

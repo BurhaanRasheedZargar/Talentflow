@@ -1,17 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { Job } from "../../../db/types";
+import type { PaginatedResponse } from "../../../api/client";
 import { archiveJobApi, createJob, deleteJobApi, fetchArchivedJobs, fetchJobs, reorderJobApi, unarchiveJobApi, updateJob } from "../../../api/jobs";
 
-export function useJobsList(params: { page?: number; pageSize?: number; search?: string; status?: string } = { page: 1, pageSize: 20 }) {
-	return useQuery({
-		queryKey: ["jobs", params],
-		queryFn: () => fetchJobs(params),
-		keepPreviousData: true,
-	});
+export function useJobsList(params: { page?: number; pageSize?: number; search?: string; status?: string; tag?: string } = { page: 1, pageSize: 20 }) {
+    return useQuery<PaginatedResponse<Job>>({
+        queryKey: ["jobs", params],
+        queryFn: () => fetchJobs(params),
+    });
 }
 
 export function useArchivedJobsList(params: { page?: number; pageSize?: number; search?: string; tag?: string } = { page: 1, pageSize: 20 }) {
-	return useQuery({ queryKey: ["jobs-archived", params], queryFn: () => fetchArchivedJobs(params), keepPreviousData: true });
+    return useQuery<PaginatedResponse<Job>>({ queryKey: ["jobs-archived", params], queryFn: () => fetchArchivedJobs(params) });
 }
 
 export function useCreateJob() {

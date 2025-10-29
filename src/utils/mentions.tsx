@@ -3,6 +3,7 @@
  */
 
 import { Fragment } from 'react'
+import type { ReactNode } from 'react'
 
 export interface MentionMatch {
   type: 'text' | 'mention'
@@ -46,7 +47,7 @@ export function parseMentions(text: string): MentionMatch[] {
   return parts.length > 0 ? parts : [{ type: 'text', content: text }]
 }
 
-export function renderMentions(text: string): JSX.Element {
+export function renderMentions(text: string): ReactNode {
   const parts = parseMentions(text)
 
   return (
